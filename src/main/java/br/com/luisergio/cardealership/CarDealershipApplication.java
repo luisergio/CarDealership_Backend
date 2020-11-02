@@ -11,16 +11,30 @@ import org.springframework.context.annotation.Bean;
 
 import java.sql.Timestamp;
 
+/**
+ * The type Car dealership application.
+ */
 @SpringBootApplication
 public class CarDealershipApplication {
 
 	private static final Logger log = LoggerFactory.getLogger(CarDealershipApplication.class);
 
-	public static void main(String[] args) {
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
+    public static void main(String[] args) {
 		SpringApplication.run(CarDealershipApplication.class, args);
 	}
 
-	@Bean
+    /**
+     * Demo command line runner.
+     *
+     * @param repository the repository
+     * @return the command line runner
+     */
+    @Bean
 	public CommandLineRunner demo(CarRepository repository) {
 		return (args) -> {
 			// save a few customers

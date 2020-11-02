@@ -9,6 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.Lob;
 import java.sql.Timestamp;
 
+/**
+ * The type Car.
+ */
 @Entity
 @AllArgsConstructor
 @Getter
@@ -26,6 +29,9 @@ public class Car extends BaseEntity{
     private Timestamp created;
     private Timestamp updated;
 
+    /**
+     * Instantiates a new Car.
+     */
     protected Car() {}
 
     @Override
