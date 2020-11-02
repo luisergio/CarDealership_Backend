@@ -28,7 +28,6 @@ public enum EventLogs {
      */
     SUCCESS_GET_CAR_BY_ID("0004"),
 
-
     /**
      * Try get all cars event logs.
      */
@@ -39,7 +38,25 @@ public enum EventLogs {
      */
     SUCCESS_GET_CAR_BY_CUSTOM_FILTER("0006"),
 
+    /**
+     * Try add car event logs.
+     */
+    TRY_ADD_CAR("0007"),
 
+    /**
+     * Success add car event logs.
+     */
+    SUCCESS_ADD_CAR("0008"),
+
+    /**
+     * Try update car event logs.
+     */
+    TRY_UPDATE_CAR("0009"),
+
+    /**
+     * Sucess update car event logs.
+     */
+    SUCCESS_UPDATE_CAR("0010"),
 
     /**
      * Error generic event logs.

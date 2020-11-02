@@ -9,9 +9,12 @@ import br.com.luisergio.cardealership.utils.GlobalConstants;
 import br.com.luisergio.cardealership.utils.LoggerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -62,15 +65,29 @@ public class CarController {
     }
 
     @PostMapping()
-    public ItemIdDto addCar(@Valid @RequestBody CarRequestDto car) {
+    public ResponseEntity<ItemIdDto> addCar(@Valid @RequestBody CarRequestDto car) {
 
-        loggerService.log(EventLogs.TRY_GET_CAR_BY_CUSTOM_FILTER);
+        loggerService.log(EventLogs.TRY_ADD_CAR);
 
         ItemIdDto id = carBusiness.addCar(car);
+        ResponseEntity<ItemIdDto> responseEntity = new ResponseEntity<>(id, null, HttpStatus.CREATED);
 
-        loggerService.log(EventLogs.SUCCESS_GET_CAR_BY_CUSTOM_FILTER);
+        loggerService.log(EventLogs.SUCCESS_ADD_CAR);
 
-        return id;
+        return responseEntity;
+    }
+
+    @PutMapping(GlobalConstants.URL_PATH_ID)
+    public CarDto updateCar(@Valid @RequestBody CarRequestDto car,
+            @PathVariable(GlobalConstants.PATH_ID) Long id) {
+
+        loggerService.log(EventLogs.TRY_UPDATE_CAR);
+
+        CarDto CarDto = carBusiness.updateCar(car, id);
+
+        loggerService.log(EventLogs.SUCCESS_UPDATE_CAR);
+
+        return CarDto;
     }
 
 }

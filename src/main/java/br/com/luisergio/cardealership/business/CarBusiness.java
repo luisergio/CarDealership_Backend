@@ -13,4 +13,6 @@ public interface CarBusiness {
     CarDto getById(Long id);
 
     ItemIdDto addCar(CarRequestDto carRequestDto);
+
+    CarDto updateCar(CarRequestDto carRequestDto, Long id);
 }

@@ -39,12 +39,7 @@ public class CarBusinessImpl extends BaseBusiness<CarDto, Car> implements CarBus
 
     @Override
     public CarDto getById(Long id) {
-        Optional<Car> optionalCar = carRepository.findById(id);
-
-        if(optionalCar.isPresent())
-            return this.getDto(optionalCar.get());
-        else
-            throw new ItemNotFoundException(GlobalConstants.ERROR_ITEM_NOT_FOUND);
+        return this.getDto(this.getEntityById(id));
     }
 
     @Override
@@ -54,12 +49,36 @@ public class CarBusinessImpl extends BaseBusiness<CarDto, Car> implements CarBus
         return ItemIdDto.builder().id(car.getId()).build();
     }
 
+    @Override
+    public CarDto updateCar(CarRequestDto carRequestDto, Long id) {
+        Car car = this.getEntityById(id);
+
+        car.setName(carRequestDto.getName());
+        car.setBrand(carRequestDto.getBrand());
+        car.setYear(carRequestDto.getYear());
+        car.setDescription(carRequestDto.getDescription());
+        car.setSold(carRequestDto.isSold());
+        car.setUpdated(new Timestamp(System.currentTimeMillis()));
+        carRepository.save(car);
+
+        return this.getDto(car);
+    }
+
+    private Car getEntityById(Long id) {
+        Optional<Car> optionalCar = carRepository.findById(id);
+
+        if(optionalCar.isPresent())
+            return optionalCar.get();
+        else
+            throw new ItemNotFoundException(GlobalConstants.ERROR_ITEM_NOT_FOUND);
+    }
+
     public CarDto getDto(Car car){
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy' 'HH:mm:ss:S");
 
         Date createdDate = new Date(car.getCreated().getTime());
-        Date updatedDate = new Date(car.getCreated().getTime());
+        Date updatedDate = new Date(car.getUpdated().getTime());
 
         return CarDto.builder()
                 .id(car.getId())
@@ -84,5 +103,4 @@ public class CarBusinessImpl extends BaseBusiness<CarDto, Car> implements CarBus
                 .updated(new Timestamp(System.currentTimeMillis()))
                 .build();
     }
-
 }
