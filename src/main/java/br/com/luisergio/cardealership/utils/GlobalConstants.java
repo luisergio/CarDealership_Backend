@@ -26,6 +26,9 @@ public class GlobalConstants {
     public static final String PATH_ID = "id";
 
 
+    /**
+     * The constant ERROR_ITEM_NOT_FOUND.
+     */
     public static final String ERROR_ITEM_NOT_FOUND = "Item não encontrado.";
 
 }

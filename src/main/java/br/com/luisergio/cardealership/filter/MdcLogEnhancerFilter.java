@@ -11,6 +11,9 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The type Mdc log enhancer filter.
+ */
 @Component
 public class MdcLogEnhancerFilter extends GenericFilter {
 

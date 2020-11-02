@@ -3,6 +3,9 @@ package br.com.luisergio.cardealership.dto;
 import lombok.Builder;
 import lombok.Data;
 
+/**
+ * The type Car dto.
+ */
 @Data
 @Builder
 public class CarDto {
