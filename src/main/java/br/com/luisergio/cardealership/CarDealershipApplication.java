@@ -1,23 +1,35 @@
 package br.com.luisergio.cardealership;
 
 import br.com.luisergio.cardealership.entity.Car;
+import br.com.luisergio.cardealership.filter.MdcLogEnhancerFilter;
 import br.com.luisergio.cardealership.repository.CarRepository;
+import br.com.luisergio.cardealership.utils.LoggerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 
 import java.sql.Timestamp;
 
 /**
  * The type Car dealership application.
  */
+@ComponentScan(basePackages = "br.com.luisergio",
+        excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE,
+                classes = MdcLogEnhancerFilter.class))
 @SpringBootApplication
 public class CarDealershipApplication {
 
-	private static final Logger log = LoggerFactory.getLogger(CarDealershipApplication.class);
+    /**
+     * The Logger service.
+     */
+    @Autowired
+	private LoggerService loggerService;
 
     /**
      * The entry point of application.
@@ -45,45 +57,45 @@ public class CarDealershipApplication {
 			repository.save(getCar("CRV", "Honda", 2020));
 
 			// fetch all cars
-			log.info("Car found with findAll():");
-			log.info("-------------------------------");
+            loggerService.log("Car found with findAll():");
+            loggerService.log("-------------------------------");
 			for (Car car : repository.findAll()) {
-				log.info(car.toString());
+                loggerService.log(car.toString());
 			}
-			log.info("");
+            loggerService.log("");
 
 			// fetch an individual car by ID
 			Car car = repository.findById(1L);
-			log.info("Car found with findById(1L):");
-			log.info("--------------------------------");
-			log.info(car.toString());
-			log.info("");
+			loggerService.log("Car found with findById(1L):");
+			loggerService.log("--------------------------------");
+			loggerService.log(car.toString());
+			loggerService.log("");
 
 			// Update an individual car
 			car.setYear(2012);
 			repository.save(car);
 			car = repository.findById(1L);
-			log.info("Car found with findById(1L) after year update:");
-			log.info("--------------------------------");
-			log.info(car.toString());
-			log.info("");
+			loggerService.log("Car found with findById(1L) after year update:");
+			loggerService.log("--------------------------------");
+			loggerService.log(car.toString());
+			loggerService.log("");
 
 			// fetch cars by brand
-			log.info("Car found with findByBrand('Fiat'):");
-			log.info("--------------------------------------------");
+			loggerService.log("Car found with findByBrand('Fiat'):");
+			loggerService.log("--------------------------------------------");
 			repository.findByBrand("Fiat").forEach(fiat -> {
-				log.info(fiat.toString());
+				loggerService.log(fiat.toString());
 			});
-			log.info("");
+			loggerService.log("");
 
 			// fetch cars by period
-			log.info("Car found with findByYearPeriod(2010,2019):");
-			log.info("--------------------------------------------");
+			loggerService.log("Car found with findByYearPeriod(2010,2019):");
+			loggerService.log("--------------------------------------------");
 			repository.findByYearPeriod(2010, 2019).forEach(fiat -> {
-				log.info(fiat.toString());
+				loggerService.log(fiat.toString());
 			});
 
-			log.info("");
+			loggerService.log("");
 		};
 	}
 
