@@ -8,5 +8,5 @@ public interface CarBusiness {
 
     List<CarDto> getAll();
 
-    CarDto getById(Integer id);
+    CarDto getById(Long id);
 }

@@ -16,7 +16,27 @@ public enum EventLogs {
     /**
      * Sucess get all cards event logs.
      */
-    SUCCESS_GET_ALL_CARS("0002");
+    SUCCESS_GET_ALL_CARS("0002"),
+
+    /**
+     * Try get all cars event logs.
+     */
+    TRY_GET_CAR_BY_ID("0003"),
+
+    /**
+     * Sucess get all cards event logs.
+     */
+    SUCCESS_GET_CAR_BY_ID("0004"),
+
+    /**
+     * Error generic event logs.
+     */
+    ERROR_GENERIC("0100"),
+
+    /**
+     * Error item not found event logs.
+     */
+    ERROR_ITEM_NOT_FOUND("0101");
 
 
     /** Event code. */

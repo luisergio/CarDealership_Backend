@@ -9,6 +9,7 @@ import br.com.luisergio.cardealership.utils.LoggerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,6 +40,18 @@ public class CarController {
         List<CarDto> result = carBusiness.getAll();
 
         loggerService.log(EventLogs.SUCCESS_GET_ALL_CARS);
+
+        return result;
+    }
+
+    @GetMapping(GlobalConstants.URL_PATH_ID)
+    public CarDto getCarById(@PathVariable(GlobalConstants.PATH_ID) Long id){
+
+        loggerService.log(EventLogs.TRY_GET_CAR_BY_ID);
+
+        CarDto result = carBusiness.getById(id);
+
+        loggerService.log(EventLogs.SUCCESS_GET_CAR_BY_ID);
 
         return result;
     }

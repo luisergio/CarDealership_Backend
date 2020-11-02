@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @Builder
 public class CarDto {
-    private Integer id;
+    private Long id;
     private String name;
     private String brand;
     private Integer year;
