@@ -28,6 +28,19 @@ public enum EventLogs {
      */
     SUCCESS_GET_CAR_BY_ID("0004"),
 
+
+    /**
+     * Try get all cars event logs.
+     */
+    TRY_GET_CAR_BY_CUSTOM_FILTER("0005"),
+
+    /**
+     * Sucess get all cards event logs.
+     */
+    SUCCESS_GET_CAR_BY_CUSTOM_FILTER("0006"),
+
+
+
     /**
      * Error generic event logs.
      */
@@ -36,7 +49,10 @@ public enum EventLogs {
     /**
      * Error item not found event logs.
      */
-    ERROR_ITEM_NOT_FOUND("0101");
+    ERROR_ITEM_NOT_FOUND("0101"),
+
+    
+    ERROR_INVALID_REQUEST("0102");
 
 
     /** Event code. */

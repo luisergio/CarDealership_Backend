@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import java.sql.Timestamp;
@@ -22,8 +23,8 @@ public class Car extends BaseEntity{
     private String name;
     private String brand;
     private Integer year;
-
     @Lob
+    @Column(length = 1024)
     private String description;
     private boolean sold;
     private Timestamp created;

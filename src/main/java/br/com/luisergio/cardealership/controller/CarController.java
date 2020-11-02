@@ -2,17 +2,22 @@ package br.com.luisergio.cardealership.controller;
 
 import br.com.luisergio.cardealership.business.CarBusiness;
 import br.com.luisergio.cardealership.dto.CarDto;
+import br.com.luisergio.cardealership.dto.CarRequestDto;
+import br.com.luisergio.cardealership.dto.ItemIdDto;
 import br.com.luisergio.cardealership.dto.enumeration.EventLogs;
-import br.com.luisergio.cardealership.entity.Car;
 import br.com.luisergio.cardealership.utils.GlobalConstants;
 import br.com.luisergio.cardealership.utils.LoggerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -54,6 +59,18 @@ public class CarController {
         loggerService.log(EventLogs.SUCCESS_GET_CAR_BY_ID);
 
         return result;
+    }
+
+    @PostMapping()
+    public ItemIdDto addCar(@Valid @RequestBody CarRequestDto car) {
+
+        loggerService.log(EventLogs.TRY_GET_CAR_BY_CUSTOM_FILTER);
+
+        ItemIdDto id = carBusiness.addCar(car);
+
+        loggerService.log(EventLogs.SUCCESS_GET_CAR_BY_CUSTOM_FILTER);
+
+        return id;
     }
 
 }
