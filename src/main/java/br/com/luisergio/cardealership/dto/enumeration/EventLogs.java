@@ -59,6 +59,18 @@ public enum EventLogs {
     SUCCESS_UPDATE_CAR("0010"),
 
     /**
+     * Try delete car event logs.
+     */
+    TRY_DELETE_CAR("0011"),
+
+    /**
+     * Sucess delete car event logs.
+     */
+    SUCCESS_DELETE_CAR("0012"),
+
+
+
+    /**
      * Error generic event logs.
      */
     ERROR_GENERIC("0100"),
@@ -68,7 +80,10 @@ public enum EventLogs {
      */
     ERROR_ITEM_NOT_FOUND("0101"),
 
-    
+
+    /**
+     * Error invalid request event logs.
+     */
     ERROR_INVALID_REQUEST("0102");
 
 

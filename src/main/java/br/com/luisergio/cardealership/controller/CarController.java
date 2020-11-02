@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,6 +41,11 @@ public class CarController {
     @Autowired
     private CarBusiness carBusiness;
 
+    /**
+     * Get all cars list.
+     *
+     * @return the list
+     */
     @GetMapping()
     public List<CarDto> getAllCars(){
 
@@ -52,6 +58,12 @@ public class CarController {
         return result;
     }
 
+    /**
+     * Gets car by id.
+     *
+     * @param id the id
+     * @return the car by id
+     */
     @GetMapping(GlobalConstants.URL_PATH_ID)
     public CarDto getCarById(@PathVariable(GlobalConstants.PATH_ID) Long id){
 
@@ -64,6 +76,12 @@ public class CarController {
         return result;
     }
 
+    /**
+     * Add car response entity.
+     *
+     * @param car the car
+     * @return the response entity
+     */
     @PostMapping()
     public ResponseEntity<ItemIdDto> addCar(@Valid @RequestBody CarRequestDto car) {
 
@@ -77,6 +95,13 @@ public class CarController {
         return responseEntity;
     }
 
+    /**
+     * Update car car dto.
+     *
+     * @param car the car
+     * @param id  the id
+     * @return the car dto
+     */
     @PutMapping(GlobalConstants.URL_PATH_ID)
     public CarDto updateCar(@Valid @RequestBody CarRequestDto car,
             @PathVariable(GlobalConstants.PATH_ID) Long id) {
@@ -88,6 +113,18 @@ public class CarController {
         loggerService.log(EventLogs.SUCCESS_UPDATE_CAR);
 
         return CarDto;
+    }
+
+    @DeleteMapping(GlobalConstants.URL_PATH_ID)
+    public ResponseEntity deleteCar(@PathVariable(GlobalConstants.PATH_ID) Long id) {
+
+        loggerService.log(EventLogs.TRY_DELETE_CAR);
+
+        carBusiness.deleteCar(id);
+
+        loggerService.log(EventLogs.SUCCESS_DELETE_CAR);
+
+        return new ResponseEntity(null,null,HttpStatus.OK);
     }
 
 }

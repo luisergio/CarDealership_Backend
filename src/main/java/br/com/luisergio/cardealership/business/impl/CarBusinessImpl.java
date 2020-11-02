@@ -64,6 +64,12 @@ public class CarBusinessImpl extends BaseBusiness<CarDto, Car> implements CarBus
         return this.getDto(car);
     }
 
+    @Override
+    public void deleteCar(Long id) {
+        Car car = this.getEntityById(id);
+        carRepository.delete(car);
+    }
+
     private Car getEntityById(Long id) {
         Optional<Car> optionalCar = carRepository.findById(id);
 
